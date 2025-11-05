@@ -15,7 +15,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// Get user events
+
 router.get('/', auth, async (req, res) => {
   try {
     const events = await Event.find({ user: req.user });
@@ -25,7 +25,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// Update event status
+
 router.put('/:id', auth, async (req, res) => {
   try {
     const event = await Event.findOne({ _id: req.params.id, user: req.user });
