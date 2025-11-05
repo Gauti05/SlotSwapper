@@ -1,11 +1,11 @@
-// routes/swapRequests.js
+
 const express = require('express');
 const router = express.Router();
 const SwapRequest = require('../models/SwapRequest');
 const Event = require('../models/Event');
 const auth = require('../middleware/auth');
 
-// Create swap request
+
 router.post('/swap-request', auth, async (req, res) => {
   const { mySlotId, theirSlotId } = req.body;
   if (!mySlotId || !theirSlotId) return res.status(400).json({ message: 'Missing slot IDs' });
@@ -47,7 +47,7 @@ router.post('/swap-request', auth, async (req, res) => {
   }
 });
 
-// Get incoming and outgoing swap requests
+
 router.get('/swap-requests', auth, async (req, res) => {
   try {
     const incoming = await SwapRequest.find({ requestee: req.user, status: 'PENDING' }).populate('mySlot theirSlot');
@@ -58,7 +58,7 @@ router.get('/swap-requests', auth, async (req, res) => {
   }
 });
 
-// Respond to swap request
+
 router.post('/swap-response/:id', auth, async (req, res) => {
   const { accept } = req.body;
   try {
@@ -85,7 +85,6 @@ router.post('/swap-response/:id', auth, async (req, res) => {
     const session = await SwapRequest.startSession();
     session.startTransaction();
 
-    // Swap owners of the two slots
     const tempOwner = swapRequest.mySlot.user;
     swapRequest.mySlot.user = swapRequest.theirSlot.user;
     swapRequest.theirSlot.user = tempOwner;
