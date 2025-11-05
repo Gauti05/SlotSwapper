@@ -18,12 +18,12 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const res = await api.post('/api/auth/login', { email, password });  // Use api instance here
+    const res = await api.post('/api/auth/login', { email, password });  
     setToken(res.data.token);
   };
 
   const signup = async (name, email, password) => {
-    const res = await api.post('/api/auth/signup', { name, email, password });  // Use api instance here
+    const res = await api.post('/api/auth/signup', { name, email, password });  
     setToken(res.data.token);
   };
 
