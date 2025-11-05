@@ -1,4 +1,4 @@
-// models/SwapRequest.js
+
 const mongoose = require('mongoose');
 
 const SwapRequestSchema = new mongoose.Schema({
